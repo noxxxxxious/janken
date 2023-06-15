@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #three {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #three canvas {
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        #menu {
+            padding: 20px;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            align-items: center;
+        }
+
+        .fakebutton {
+            background-image: url('images/fakebuttonbg.webp');
+            background-size: cover;
+            width: fit-content;
+            width: 300px;
+            height: 130px;
+            color: white;
+            text-shadow: 4px 4px 5px #0005;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Roboto';
+        }
+
+        .fakebutton span {
+            transform: rotate(-10deg) translate(-5px, -5px);
+        }
+
+        .playbutton {
+            font-size: 50px;
+            -webkit-text-stroke: 3px #000;
+        }
+
+        .battlepassbutton {
+            font-size: 30px;
+            -webkit-text-stroke: 2px #000;
+        }
+
+        .customizebutton {
+            font-size: 30px;
+            -webkit-text-stroke: 2px #000;
+        }
+
+        .settingsbutton {
+            font-size: 30px;
+            -webkit-text-stroke: 2px #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <img src="images/fakelogo.webp" >
+        <div class="fakebutton playbutton">
+            <span>PLAY</span>
+        </div>
+        <div class="fakebutton battlepassbutton">
+            <span>BATTLE PASS</span>
+        </div>
+        <div class="fakebutton customizebutton">
+            <span>CUSTOMIZE</span>
+        </div>
+        <div class="fakebutton settingsbutton">
+            <span>SETTINGS</span>
+        </div>
+    </div>
+    <div id="three"></div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
