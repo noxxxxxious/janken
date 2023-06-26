@@ -1,7 +1,10 @@
 import { Schema } from "mongoose"
 
 const userSchema = new Schema({
-    username: String,
+    username: {
+        type: String,
+        unique: true
+    },
     password: String,
     battlePass: {
         level: Number,

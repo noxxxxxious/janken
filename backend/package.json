@@ -1,4 +1,5 @@
 {
+	"type": "module",
 	"scripts": {
 		"start": "rm -rf ./out && tsc && cp -r ./src/public ./out && node ./out/main.js",
 		"nodemon-start": "nodemon --watch /src --exec pnpm start"
