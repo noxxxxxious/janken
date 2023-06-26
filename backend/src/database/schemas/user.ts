@@ -1,6 +1,6 @@
-import mongoose from "mongoose"
+import { Schema } from "mongoose"
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     username: String,
     password: String,
     battlePass: {

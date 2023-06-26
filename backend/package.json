@@ -1,12 +1,15 @@
 {
 	"scripts": {
-		"start": "tsc && node ./out/main.js"
+		"start": "rm -rf ./out && tsc && cp -r ./src/public ./out && node ./out/main.js",
+		"nodemon-start": "nodemon --watch /src --exec pnpm start"
 	},
 	"dependencies": {
+		"dotenv": "^16.3.1",
 		"express": "^4.18.2",
 		"mongoose": "^7.3.1"
 	},
 	"devDependencies": {
-		"@types/express": "^4.17.17"
+		"@types/express": "^4.17.17",
+		"nodemon": "^2.0.22"
 	}
 }

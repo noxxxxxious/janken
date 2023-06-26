@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        Username: <input type="text" name="username" id="username"><br>
+        Password: <input type="text" name="password" id="password"><br>
+        <input type="submit" value="Submit" id="submitbutton">
+    </form>
+    <script>
+        document.querySelector('#submitbutton').addEventListener('click', event => {
+            event.preventDefault()
+
+            let formData = {
+                username: document.querySelector('#username').value,
+                password: document.querySelector('#password').value
+            }
+
+            console.log(formData)
+    
+            fetch('/rpsapi/user/create', {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(rawdata => rawdata.json())
+            .then(data => {
+                console.log(data)
+            })
+        })
+    </script>
+</body>
+</html>

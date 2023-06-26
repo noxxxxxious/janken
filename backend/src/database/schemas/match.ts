@@ -1,6 +1,6 @@
-import mongoose from "mongoose"
+import { Schema } from "mongoose"
 
-const matchSchema = new mongoose.Schema({
+const matchSchema = new Schema({
     participants: Array,
     winner: Number,
     gameCompleted: Boolean,
