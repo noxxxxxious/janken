@@ -42,6 +42,7 @@
             console.log(`Connection established ${socket.id}`)
             setTimeout(() => {
                 console.log('emitting test event', socket)
+                socket.emit('testevent', "test")
             }, 1000)
     
         })
