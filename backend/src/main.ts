@@ -6,6 +6,7 @@ import path from 'path'
 
 
 import createUser from "./database/functions/user/createUser.js"
+import initSocketServer from './socketEvents/index.js'
 
 const __dirname = path.resolve(path.dirname(''))
 
@@ -28,9 +29,7 @@ app.get('/', (_req, res) => {
     res.sendFile(__dirname + '/out/public/index.html')
 })
 
-io.on('connection', (socket) => {
-    console.log('user connected')
-})
+initSocketServer(io)
 
 httpServer.listen(process.env.EXPRESS_PORT, () => {
     console.log(`Express running on port ${process.env.EXPRESS_PORT}.`)
