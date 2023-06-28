@@ -5,8 +5,11 @@
 		"nodemon-start": "nodemon --watch /src --exec pnpm start"
 	},
 	"dependencies": {
+		"@types/lodash": "^4.14.195",
+		"@types/uuid": "^9.0.2",
 		"dotenv": "^16.3.1",
 		"express": "^4.18.2",
+		"lodash": "^4.17.21",
 		"mongoose": "^7.3.1",
 		"socket.io": "^4.7.0",
 		"uuid": "^9.0.0"

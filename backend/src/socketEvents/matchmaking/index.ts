@@ -13,7 +13,7 @@ interface SearchingPlayer {
 const searchingPlayers: SearchingPlayer[] = []
 
 //Try to match players every x amount of seconds
-const timeBetweenMatchingsInSeconds = 5
+const timeBetweenMatchingsInSeconds = 10
 
 setInterval(() => {
     console.log('Attempting to match players...')
@@ -41,7 +41,10 @@ function registerMatchmakingEvents(socket: Socket) {
 //Add player to search array
 function searchForGame(socket: Socket) {
     socket.on('searchForGame', playerName => {
-        if()
+        if(searchingPlayers.find(player => player.name == playerName)) {
+            console.log(`${playerName} already searching for game`)
+            return
+        }
         searchingPlayers.push({ name: playerName, socket })
         console.log(`Added ${playerName} with socket id ${socket.id} to matchmaking list.`)
     })
