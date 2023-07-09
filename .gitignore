@@ -134,3 +134,4 @@ dist
 #######################
 backend/node_modules
 backend/out
+.vite/
