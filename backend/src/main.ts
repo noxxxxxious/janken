@@ -1,21 +1,7 @@
 import 'dotenv/config'
-import { createServer } from 'http'
-import express from "express"
-import { Server } from 'socket.io'
-import path from 'path'
-
-
-import createUser from "./database/functions/user/createUser.js"
+import { app, httpServer, io } from './server.js'
 import initSocketServer from './socketEvents/index.js'
-
-const __dirname = path.resolve(path.dirname(''))
-
-const app = express()
-const httpServer = createServer(app)
-const io = new Server(httpServer)
-
-app.use(express.static('public'))
-app.use(express.json())
+import createUser from "./database/functions/user/createUser.js"
 
 if(!process.env.EXPRESS_PORT) throw new Error("Unable to determine process.env.EXPRESS_PORT")
 
