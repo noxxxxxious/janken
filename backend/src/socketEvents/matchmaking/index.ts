@@ -1,37 +1,16 @@
 import { Socket } from "socket.io"
-import { io } from '../../server.js'
 import { v4 as uuidv4 } from 'uuid'
 import _ from 'lodash'
 
-
-//Search data shape
-interface PlayerInstance {
-    name: String,
-    socket: Socket
-}
+import { io } from '../../server.js'
+import { createMatch } from './match.js'
+import { PlayerInstance } from './types.js'
 
 //Store players searching for a match here
 const searchingPlayers: PlayerInstance[] = []
 
 //Try to match players every x amount of seconds
 const timeBetweenMatchingsInSeconds = 10
-
-//Ongoing match data shape
-interface OngoingMatch {
-    matchId: string,
-    participants: PlayerInstance[],
-    winner: PlayerInstance | null,
-    rounds: Round[]
-}
-
-interface Round {
-    winner: PlayerInstance
-    player0Move: string,
-    player1Move: string,
-}
-
-//Store current matches here
-const currentMatches: OngoingMatch[] = []
 
 //Match players
 setInterval(() => {
@@ -47,27 +26,12 @@ setInterval(() => {
             bufferPlayer = player
         } else {
             //If matching someone, this current person will be their adversary
-            const matchId = uuidv4()
-            console.log(`Match created: ${bufferPlayer.name} vs ${player.name} | match ${matchId}`)
-
             //Remove players from search queue
             stopSearchingForGame(bufferPlayer.socket)
             stopSearchingForGame(player.socket)
 
-            //Create current match
-            currentMatches.push({
-                matchId,
-                participants: [bufferPlayer, player],
-                winner: null,
-                rounds: []
-            })
-            //Add players to socket room for match
-            bufferPlayer.socket.join(`match/${matchId}`)
-            player.socket.join(`match/${matchId}`)
-
-            io.in(`match/${matchId}`).emit("start match", {
-                players: [ bufferPlayer.name, player.name ]
-            })
+            //Create match
+            createMatch([bufferPlayer, player])
 
             //Clear matching player to start over
             bufferPlayer = null

@@ -1,7 +1,10 @@
 import 'dotenv/config'
+import path from 'path'
 import { app, httpServer, io } from './server.js'
 import initSocketServer from './socketEvents/index.js'
 import createUser from "./database/functions/user/createUser.js"
+
+const __dirname = path.resolve(path.dirname(''))
 
 if(!process.env.EXPRESS_PORT) throw new Error("Unable to determine process.env.EXPRESS_PORT")
 

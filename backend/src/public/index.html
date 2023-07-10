@@ -4,27 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .match-details {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <form>
-        Username: <input type="text" name="username" id="username"><br>
+    <form id="login">
+        <label for="username">Username:</label> <input type="text" name="username" id="username"><br>
         <input type="submit" value="Search for Game" id="submitbutton">
     </form>
+    <div class="match-details">
+        <span id="player-name"></span> vs <span id="enemy-name"></span><br>
+        <br><br><br><br>
+        <button>Rock</button><button>Paper</button><button>Scissors</button>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+        let matchId
         document.querySelector('#submitbutton').addEventListener('click', event => {
             event.preventDefault()
 
             const username = document.querySelector('#username').value
+            let enemyname
             const socket = io();
 
             socket.on('connect', () => {
                 console.log(`Connection established ${socket.id}`)
                 socket.emit('searchForGame', username)
+                document.querySelector('#submitbutton').style.display = 'none'
             })
 
-            socket.on('gamefound', (players) => {
-                console.log('found game. players:' + players)
+            socket.on('start match', (matchInfo) => {
+                matchInfo = JSON.parse(matchInfo)
+                console.log(matchInfo)
+                matchId = matchInfo.matchId
+                document.querySelector('#login').style.display = 'none'
+                document.querySelector('#player-name').innerHTML = username
+                document.querySelector('#enemy-name').innerHTML = matchInfo.players[0] !== username ? matchInfo.players[0] : matchInfo.players[1]
+                document.querySelector('.match-details').style.display = 'initial'
             })
         })
     </script>
